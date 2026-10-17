@@ -1,0 +1,82 @@
+DJW PLAYER — GITHUB UPLOAD PACK
+
+This pack prepares your GitHub download/update hosting. It does not change the installed Android app or publish anything for you.
+
+THE APK IS INCLUDED
+Your verified DJW-Player-0.3.5.apk is already beside update.json in the numbered release folder. No source files, signing keys or passwords are included.
+
+FIRST TIME — DO THIS ON GITHUB
+
+1. Open your repository: https://github.com/dazzza19/DJWplayer
+   Make sure it is public if other people should download without logging in.
+
+2. Open this pack's 1-upload-to-repository folder.
+   On GitHub, choose uploading an existing file (or Add file > Upload files).
+   Drag the CONTENTS of that folder onto GitHub, then Commit changes.
+   Upload the files themselves, not this whole ZIP or its numbered parent folder.
+
+3. Open the 2-upload-to-release-v0.3.5 folder. Both required files are already
+   there: DJW-Player-0.3.5.apk and update.json. Do not rename either file.
+
+4. In the GitHub repository, open Releases > Create a new release.
+   Create tag: v0.3.5
+   Release title: DJW Player 0.3.5 test
+   Paste the text from RELEASE-NOTES.txt into the description.
+
+5. In the release's attachment box, drag in BOTH:
+      DJW-Player-0.3.5.apk
+      update.json
+   Wait for both uploads to finish. These go in Releases, not the main file list.
+   Leave 'Set as a pre-release' UNTICKED for this simple latest-release feed.
+   Mark this release as latest if that option is shown, then Publish release.
+   The title and notes still clearly identify it as a test build.
+
+6. Your repository URL is already configured in this pack:
+   https://github.com/dazzza19/DJWplayer
+   Hosting this pack alone does NOT add an updater to your installed 0.3.5 app.
+   An Android build with the updater still needs to be made.
+
+PEOPLE CAN DOWNLOAD IT
+
+Share your repository's Releases link. For example:
+https://github.com/dazzza19/DJWplayer/releases/latest
+Anyone can open a published release in a public repository and download its APK.
+
+OPTIONAL — A SIMPLE DOWNLOAD WEBSITE
+
+In GitHub: Settings > Pages > Build and deployment > Deploy from a branch.
+Choose main and / (root), then Save. If you used another branch name, choose it.
+GitHub will display your website link when ready. The included index.html is configured for your repository and shows its latest
+release's APK. No page edit is needed for the next release.
+
+The same two website files can also be dropped onto Netlify. On Netlify, the page already points to your GitHub repository. APKs and update information still live in GitHub Releases.
+
+NEXT UPDATE
+
+Keep the same repository. Create a NEW release, with a new tag and the new APK.
+I will supply an update.json matching each new APK. Attach those two files to
+that release and publish it as latest. Do not reuse the 0.3.5 update.json for a
+new build: it contains the exact file size, checksum and Android version code.
+The page follows the latest release automatically.
+Your GitHub Pages address, after Pages is enabled, will normally be:
+https://dazzza19.github.io/DJWplayer/
+
+IMPORTANT FILES
+
+Keep your Android signing keystore private. Do not upload the earlier complete
+source-and-APK ZIP directly to a public repository: it includes the personal
+test signing key. This hosting pack contains no signing keys or passwords.
+If you want to publish the Android source too, ask me for a public-source export
+with private signing material removed and the dependency/source notices kept.
+
+Keep the same signing key and application ID for app upgrades. Android will
+still ask the phone owner to approve installing an update.
+
+IF CHATGPT OPENS A FILE INSTEAD OF SAVING IT
+
+The Android ChatGPT attachment handler may open a temporary protected copy.
+This pack cannot change that handler. Try opening this conversation at
+https://chatgpt.com in Chrome or on your computer, then download the ZIP there.
+If using X-plore, copy the whole upload-pack folder into a NORMAL Download
+folder. Do not rename a folder to .zip: that does not create a ZIP archive.
+For the GitHub release itself, select only the APK and update.json from folder 2.

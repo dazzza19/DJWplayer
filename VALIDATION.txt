@@ -1,0 +1,4 @@
+APK checksum and size matched the previously verified 0.3.5 release.
+Seven local mocked-release page checks passed.
+No account or repository was changed. Live GitHub access/public visibility could not be confirmed here.
+No Android app update checker is included in this hosting pack.
