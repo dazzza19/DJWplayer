@@ -1,16 +1,13 @@
-DJW Player 0.3.5 test — Android 8+ / arm64
+DJW Player 0.3.6 test — updater included
 
-Install over the existing DJW Player app to keep your settings and library.
+Install this APK over your existing app. Do not uninstall first.
+Open the library, tap ⋮ at the top right, then Check for updates (the first item).
+This build connects to https://github.com/dazzza19/DJWplayer.
+Future newer releases can be downloaded inside the app, with progress and
+checksum/signing verification. Android still asks you to approve installation.
 
-Changes:
-- AVI/legacy video compatibility playback and decoder fallback.
-- Live move progress in the library and Soulseek.
-- Separate copying and verification stages.
-- Move complete only after verified relocation and original-file cleanup.
-- Clear message if a verified copy is saved but the original must be kept.
-
-141 automated tests passed. Actual AVI files, SD-card providers and real Samba
-playback still need device testing. This is an early personal test build.
-
-This release does not yet contain the GitHub update checker. That will be wired
-to this repository in a subsequent Android build.
+164 automated tests passed. Actual Android installer permission/approval still
+needs phone testing. The app keeps a completed verified download for retry.
+While GitHub still publishes 0.3.5, this 0.3.6 build correctly reports that no
+newer version is available. A later release with a higher Android versionCode
+is needed to offer an update.
