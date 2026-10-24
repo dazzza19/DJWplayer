@@ -1,0 +1,64 @@
+services:
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: djw-gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      VPN_SERVICE_PROVIDER: protonvpn
+      VPN_TYPE: wireguard
+      WIREGUARD_PRIVATE_KEY: ${PROTON_WIREGUARD_PRIVATE_KEY:?run djw-set-vpn first}
+      SERVER_COUNTRIES: ${SERVER_COUNTRIES:-United Kingdom}
+      FIREWALL_INPUT_PORTS: 9091,5030,5031
+      FIREWALL_VPN_INPUT_PORTS: 51413,50300
+      TZ: Etc/UTC
+    ports:
+      - "9091:9091/tcp"
+      - "51413:51413/tcp"
+      - "51413:51413/udp"
+      - "5030:5030/tcp"
+      - "5031:5031/tcp"
+      - "50300:50300/tcp"
+    restart: unless-stopped
+
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: djw-transmission
+    network_mode: service:gluetun
+    depends_on:
+      - gluetun
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - USER=${TRANSMISSION_USER:-djw}
+      - PASS=${TRANSMISSION_PASSWORD:?run djw-set-vpn first}
+      - PEERPORT=51413
+    volumes:
+      - /var/lib/djw/appdata/transmission:/config
+      - /srv/djw/downloads:/downloads
+      - /srv/djw/downloads/incomplete:/watch
+    restart: unless-stopped
+
+  slskd:
+    image: slskd/slskd:latest
+    container_name: djw-slskd
+    network_mode: service:gluetun
+    depends_on:
+      - gluetun
+    environment:
+      - SLSKD_REMOTE_CONFIGURATION=true
+      - SLSKD_UMASK=0002
+      - SLSKD_USERNAME=${SLSKD_WEB_USER:-djw}
+      - SLSKD_PASSWORD=${SLSKD_WEB_PASSWORD:?run djw-set-vpn first}
+      - SLSKD_SLSK_USERNAME=${SLSKD_SLSK_USERNAME:-}
+      - SLSKD_SLSK_PASSWORD=${SLSKD_SLSK_PASSWORD:-}
+      - SLSKD_SHARED_DIR=/music
+      - TZ=Etc/UTC
+    volumes:
+      - /var/lib/djw/appdata/slskd:/app
+      - /srv/djw/media/music:/music:ro
+      - /srv/djw/downloads/complete:/downloads
+    restart: unless-stopped
