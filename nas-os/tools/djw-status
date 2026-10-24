@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+ip -4 -o addr show scope global | awk '{print "IP: " $4}'
+python3 - <<'PY'
+import json
+try:
+ c=json.load(open('/etc/djw-nas/server.json')); print('TV pairing PIN: '+c['tv_pin'])
+except Exception: print('TV pairing PIN: unavailable (setup incomplete)')
+PY
+systemctl --no-pager --plain is-active djw-server.service docker.service smbd.service || true
