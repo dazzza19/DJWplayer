@@ -1,0 +1,16 @@
+[Unit]
+Description=DJW media server containers
+After=docker.service network-online.target
+Requires=docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/djw-nas/compose
+ExecStart=/usr/bin/docker-compose -f media.yml up -d
+ExecStop=/usr/bin/docker-compose -f media.yml down
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target
