@@ -1,0 +1,11 @@
+#!/bin/bash
+set -euo pipefail
+read -r -s -p 'ProtonVPN WireGuard private key: ' key; echo
+read -r -p 'ProtonVPN country [United Kingdom]: ' country
+country=${country:-United Kingdom}
+umask 077
+touch /etc/djw-nas/.env
+sed -i '/^VPN_SERVICE_PROVIDER=/d;/^VPN_TYPE=/d;/^PROTON_WIREGUARD_PRIVATE_KEY=/d;/^WIREGUARD_PRIVATE_KEY=/d;/^SERVER_COUNTRIES=/d' /etc/djw-nas/.env
+printf '\nVPN_SERVICE_PROVIDER=protonvpn\nVPN_TYPE=wireguard\nPROTON_WIREGUARD_PRIVATE_KEY=%s\nSERVER_COUNTRIES=%s\n' "$key" "$country" >> /etc/djw-nas/.env
+unset key
+djw-downloads start
