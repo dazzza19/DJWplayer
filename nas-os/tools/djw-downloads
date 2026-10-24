@@ -1,9 +1,0 @@
-#!/bin/sh
-set -eu
-cd /opt/djw-nas/compose
-case "${1:-status}" in
- start) test -s /etc/djw-nas/.env || { echo 'Configure VPN and credentials first.' >&2; exit 1; }; docker-compose --env-file /etc/djw-nas/.env -f downloads.yml up -d ;;
- stop) docker-compose --env-file /etc/djw-nas/.env -f downloads.yml down ;;
- status) docker-compose --env-file /etc/djw-nas/.env -f downloads.yml ps ;;
- *) echo 'Usage: djw-downloads start|stop|status' >&2; exit 2 ;;
-esac
